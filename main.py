@@ -1,3 +1,4 @@
+import sys
 import os.path
 import tensorflow as tf
 import helper
@@ -141,6 +142,7 @@ def train_nn(sess, epochs, batch_size, get_batches_fn, train_op, cross_entropy_l
             _, loss = sess.run([train_op, cross_entropy_loss], 
                                feed_dict={input_image: image, correct_label: label, keep_prob: 0.8, learning_rate: 0.0009})
             print("{:.3f}, ".format(loss), end='')
+            sys.stdout.flush()
             total_loss += loss
             counter += 1
         print()
@@ -187,31 +189,41 @@ def run():
 
         # TODO: Train NN using the train_nn function
 
-        saver = tf.train.Saver()
+        # saver = tf.train.Saver()
 
         sess.run(tf.global_variables_initializer())
-            
-        epochs = 15
+
+        epochs = 10
+        batch_size = 2
+        train_nn(sess, epochs, batch_size, get_batches_fn, train_op, cross_entropy_loss, input_image,
+             correct_label, keep_prob, learning_rate)
+
+        epochs = 10
         batch_size = 3
         train_nn(sess, epochs, batch_size, get_batches_fn, train_op, cross_entropy_loss, input_image,
              correct_label, keep_prob, learning_rate)
 
-        epochs = 5
+        epochs = 10
         batch_size = 5
         train_nn(sess, epochs, batch_size, get_batches_fn, train_op, cross_entropy_loss, input_image,
              correct_label, keep_prob, learning_rate)
 
         epochs = 10
-        batch_size = 10
+        batch_size = 8
         train_nn(sess, epochs, batch_size, get_batches_fn, train_op, cross_entropy_loss, input_image,
              correct_label, keep_prob, learning_rate)
         
-        epochs = 20
-        batch_size = 20
+        epochs = 10
+        batch_size = 13
         train_nn(sess, epochs, batch_size, get_batches_fn, train_op, cross_entropy_loss, input_image,
              correct_label, keep_prob, learning_rate)
         
-        saver.save(sess, 'model')
+        epochs = 10
+        batch_size = 21
+        train_nn(sess, epochs, batch_size, get_batches_fn, train_op, cross_entropy_loss, input_image,
+             correct_label, keep_prob, learning_rate)
+        
+        # saver.save(sess, './model')
 
         # TODO: Save inference data using helper.save_inference_samples
         helper.save_inference_samples(runs_dir, data_dir, sess, image_shape, logits, keep_prob, input_image)
