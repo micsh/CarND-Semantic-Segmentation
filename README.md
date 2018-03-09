@@ -5,6 +5,13 @@ The goal of this project is to construct a fully convolutional network (FCN) bas
 ## Architecture
 A pre-trained VGG-16 network was converted to a fully convolutional network by converting the final fully connected layer to a 1x1 convolution and setting the depth equal to the number of desired classes (in this case, two: road and not-road). Performance is improved through the use of skip connections, performing 1x1 convolutions on previous VGG layers (in this case, layers 3 and 4) and adding them element-wise to upsampled (through transposed convolution) lower-level layers (i.e. the 1x1-convolved layer 7 is upsampled before being added to the 1x1-convolved layer 4). Each convolution and transpose convolution layer includes a kernel initializer and regularizer.
 
+Here's the conecptual summary of the decoder with the skip connections:
+
+1x1:'3' - read as 1x1 convolution on layer 3
+
+
+    OUTPUT = UP_SAMPLE (1x1:'3' + UP_SAMPLE (1x1:'4' + UP_SAMPLE (1x1:'7')))
+
 This is work is based on the paper by [Shelhamer, Long
 and Darrell](https://arxiv.org/pdf/1605.06211.pdf).
 
@@ -48,7 +55,6 @@ run 3 (60 epochs):
     batch_size: 21, epochs: 10
 
     Final cost: 0.009
-    (Image results for this run can be found in [runs](/runs/1520372357.4342237/))
 
 #### Training results of the runs compared:
 
