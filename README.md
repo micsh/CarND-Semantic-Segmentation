@@ -88,6 +88,12 @@ Here we can see a few example of the segmentation results:
 ![1](/runs/1520372357.4342237/uu_000067.png)
 ![1](/runs/1520372357.4342237/uu_000095.png)
 
+## Conclusion
+The results are very good, but they are not always perfect. There are examples where the segmentation errors, but still the dataset is relatively small, so we have enough room for improvement. 
+
+The training approach of increasing batch-size has 
+proved very useful.
+
 ---
 Original README content
 
