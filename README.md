@@ -1,4 +1,89 @@
 # Semantic Segmentation
+## Introduction
+The goal of this project is to construct a fully convolutional network (FCN) based on the VGG-16 image classifier architecture for performing semantic segmentation to identify drivable road area from a car's dashcam image on the KITTI data set.
+
+## Architecture
+A pre-trained VGG-16 network was converted to a fully convolutional network by converting the final fully connected layer to a 1x1 convolution and setting the depth equal to the number of desired classes (in this case, two: road and not-road). Performance is improved through the use of skip connections, performing 1x1 convolutions on previous VGG layers (in this case, layers 3 and 4) and adding them element-wise to upsampled (through transposed convolution) lower-level layers (i.e. the 1x1-convolved layer 7 is upsampled before being added to the 1x1-convolved layer 4). Each convolution and transpose convolution layer includes a kernel initializer and regularizer.
+
+This is work is based on the paper by [Shelhamer, Long
+and Darrell](https://arxiv.org/pdf/1605.06211.pdf).
+
+### Optimizer
+The loss function for the network is cross-entropy, and an Adam optimizer is used.
+
+### Training & Results
+The hyperparameters used for training are:
+
+    keep_prob: 0.8
+    learning_rate: 0.0009
+
+runs with increasing batch sizes:
+
+run 1 (50 epochs):
+    
+    batch_size: 3, epochs: 15
+    batch_size: 5, epochs: 5
+    batch_size: 10, epochs: 10
+    batch_size: 20, epochs: 20
+
+    Final cost: 0.022
+
+run 2 (60 epochs):
+
+    batch_size: 3, epochs: 10
+    batch_size: 3, epochs: 10
+    batch_size: 5, epochs: 10
+    batch_size: 10, epochs: 10
+    batch_size: 20, epochs: 20
+
+    Final cost: 0.019
+
+run 3 (60 epochs):
+
+    batch_size: 3, epochs: 10
+    batch_size: 3, epochs: 10
+    batch_size: 5, epochs: 10
+    batch_size: 8, epochs: 10
+    batch_size: 13, epochs: 10
+    batch_size: 21, epochs: 10
+
+    Final cost: 0.009
+    (Image results for this run can be found in [runs](/runs/1520372357.4342237/))
+
+
+## Examples
+Here we can see a few example of the segmentation results:
+
+![1](/runs/1520372357.4342237/umm_000002.png)
+![1](/runs/1520372357.4342237/um_000003.png)
+![1](/runs/1520372357.4342237/um_000005.png)
+![1](/runs/1520372357.4342237/um_000007.png)
+![1](/runs/1520372357.4342237/um_000013.png)
+![1](/runs/1520372357.4342237/um_000015.png)
+![1](/runs/1520372357.4342237/um_000032.png)
+![1](/runs/1520372357.4342237/um_000040.png)
+![1](/runs/1520372357.4342237/um_000062.png)
+![1](/runs/1520372357.4342237/umm_000008.png)
+![1](/runs/1520372357.4342237/umm_000014.png)
+![1](/runs/1520372357.4342237/umm_000024.png)
+![1](/runs/1520372357.4342237/umm_000028.png)
+![1](/runs/1520372357.4342237/umm_000032.png)
+![1](/runs/1520372357.4342237/umm_000035.png)
+![1](/runs/1520372357.4342237/uu_000002.png)
+![1](/runs/1520372357.4342237/uu_000004.png)
+![1](/runs/1520372357.4342237/uu_000013.png)
+![1](/runs/1520372357.4342237/uu_000017.png)
+![1](/runs/1520372357.4342237/uu_000023.png)
+![1](/runs/1520372357.4342237/uu_000027.png)
+![1](/runs/1520372357.4342237/uu_000049.png)
+![1](/runs/1520372357.4342237/uu_000067.png)
+![1](/runs/1520372357.4342237/uu_000095.png)
+
+---
+Original README content
+
+---
+
 ### Introduction
 In this project, you'll label the pixels of a road in images using a Fully Convolutional Network (FCN).
 
