@@ -12,12 +12,12 @@ and Darrell](https://arxiv.org/pdf/1605.06211.pdf).
 The loss function for the network is cross-entropy, and an Adam optimizer is used.
 
 ### Training & Results
-The hyperparameters used for training are:
+#### The hyperparameters used for training are:
 
     keep_prob: 0.8
     learning_rate: 0.0009
 
-runs with increasing batch sizes:
+#### runs with increasing batch sizes:
 
 run 1 (50 epochs):
     
@@ -50,6 +50,9 @@ run 3 (60 epochs):
     Final cost: 0.009
     (Image results for this run can be found in [runs](/runs/1520372357.4342237/))
 
+#### Training results of the runs compared:
+
+![results](/images/run-results.png)
 
 ## Examples
 Here we can see a few example of the segmentation results:
